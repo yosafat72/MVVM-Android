@@ -1,61 +1,47 @@
-package com.example.mvvmflow.view
+package com.example.mvvmflow.view.fragment
 
 import android.os.Bundle
 import android.util.Log
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
+import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
-import com.example.mvvmflow.adapter.DashboardMenuViewPagerAdapter
-import com.example.mvvmflow.databinding.ActivityMainBinding
+import com.example.mvvmflow.R
+import com.example.mvvmflow.databinding.FragmentHeadlinesBinding
 import com.example.mvvmflow.model.ArticlesItem
 import com.example.mvvmflow.model.NewsModel
 import com.example.mvvmflow.service.Status
 import com.example.mvvmflow.utils.Constanta
 import com.example.mvvmflow.viewmodel.NewsViewModel
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
+class HeadlinesFragment : Fragment() {
 
-class MainActivity : AppCompatActivity() {
+    private lateinit var binding: FragmentHeadlinesBinding
 
-    private lateinit var binding: ActivityMainBinding
-
-    private val viewModel : NewsViewModel by lazy {
+    private val viewModel: NewsViewModel by lazy {
         ViewModelProvider(this)[NewsViewModel::class.java]
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        createViewPager()
-        observeViewModel()
+        binding = FragmentHeadlinesBinding.inflate(inflater, container, false)
 
         viewModel.getTopHeadlines(Constanta().API_KEY, "id")
 
-    }
+        observeViewModel()
 
+        return binding.root
 
-
-    private fun createViewPager(){
-
-        val titles = arrayOf("Terbaru", "Berita Utama", "Most Popular", "Most Commented")
-
-        binding.viewPager.adapter = DashboardMenuViewPagerAdapter(this, titles.size)
-
-        TabLayoutMediator(
-            binding.tabLayout, binding.viewPager
-        ) { tab: TabLayout.Tab, position: Int ->
-            tab.text = titles[position]
-        }.attach()
     }
 
     private fun observeViewModel(){
@@ -78,7 +64,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onLoading(){
-        binding.imgSlider.visibility = View.GONE
+        binding.rvHeadlines.visibility = View.GONE
         binding.imgLottie.visibility = View.VISIBLE
     }
 
@@ -88,22 +74,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun createTopHeadlinesImageSlider(data: List<ArticlesItem?>?){
 
-        binding.imgSlider.visibility = View.VISIBLE
+        binding.rvHeadlines.visibility = View.VISIBLE
         binding.imgLottie.visibility = View.GONE
 
-        val imageList = ArrayList<SlideModel>()
 
-        for(item in data!!.take(5)){
-            imageList.add(
-                SlideModel(
-                    item?.urlToImage,
-                    item?.title
-                )
-            )
-        }
-
-        binding.imgSlider.setImageList(imageList, ScaleTypes.FIT)
 
     }
+
 
 }
