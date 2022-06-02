@@ -1,9 +1,11 @@
 package com.example.mvvmflow.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.mvvmflow.model.UserModel
-import com.example.mvvmflow.repository.UserRepository
+import com.example.mvvmflow.model.NewsModel
+import com.example.mvvmflow.repository.NewsRepository
 import com.example.mvvmflow.service.ApiState
 import com.example.mvvmflow.service.RetrofitBuilder
 import com.example.mvvmflow.service.Status
@@ -12,24 +14,24 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class UserViewModel : ViewModel() {
+class NewsViewModel : ViewModel() {
 
-    private val repository = UserRepository(
+    private val repository = NewsRepository(
         RetrofitBuilder.ApiService()
     )
 
     val state = MutableStateFlow(
         ApiState(
             Status.IDLE,
-            UserModel(),
+            NewsModel(),
             ""
         )
     )
 
-    fun saveNewUser(name: String, job: String){
+    fun getTopHeadlines(key: String, country: String){
         state.value = ApiState.loading()
         viewModelScope.launch {
-            repository.saveUser(name, job)
+            repository.getTopHeadlines(key, country)
                 .catch {
                     state.value = ApiState.error(it.localizedMessage)
                 }
@@ -38,4 +40,6 @@ class UserViewModel : ViewModel() {
                 }
         }
     }
+
+
 }

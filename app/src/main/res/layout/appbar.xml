@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:cardUseCompatPadding="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="@dimen/size_50"
+                android:layout_height="@dimen/size_50"
+                android:src="@drawable/detik_logo"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true"
+                 android:layout_marginLeft="@dimen/size_10"/>
+
+            <ImageView
+                android:layout_width="@dimen/size_100"
+                android:layout_height="@dimen/size_40"
+                android:src="@drawable/detik_text_logo"
+                android:layout_centerInParent="true"/>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

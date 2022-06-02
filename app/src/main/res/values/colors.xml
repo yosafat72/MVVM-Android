@@ -7,4 +7,11 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="red">#EB1C24</color>
+    <color name="ocean_boat_blue">#0477BF</color>
+    <color name="dollar_bill">#91C757</color>
+    <color name="princeton_orange">#F28322</color>
+    <color name="maximum_purple">#7D2885</color>
+    <color name="ghost_white">#F8F9F9</color>
 </resources>
