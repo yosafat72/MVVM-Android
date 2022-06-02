@@ -11,4 +11,11 @@ interface ApiService {
         @Query("country") country: String
     ) : NewsModel
 
+    @GET("top-headlines")
+    suspend fun getNews(
+        @Query("apiKey") key: String,
+        @Query("country") country: String,
+        @Query("category") category: String
+    ) : NewsModel
+
 }

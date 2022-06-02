@@ -10,8 +10,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.mvvmflow.adapter.LatestNewsAdapter
-import com.example.mvvmflow.databinding.FragmentLatestNewsBinding
+import com.example.mvvmflow.R
+import com.example.mvvmflow.adapter.NewsAdapter
+import com.example.mvvmflow.databinding.FragmentNewsBinding
 import com.example.mvvmflow.model.ArticlesItem
 import com.example.mvvmflow.model.NewsModel
 import com.example.mvvmflow.service.Status
@@ -20,22 +21,22 @@ import com.example.mvvmflow.viewmodel.NewsViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class LatestNewsFragment : Fragment() {
+class NewsFragment(private val category: String) : Fragment() {
 
-    private lateinit var binding: FragmentLatestNewsBinding
+    private lateinit var binding: FragmentNewsBinding
 
     private val viewModel: NewsViewModel by lazy {
         ViewModelProvider(this)[NewsViewModel::class.java]
     }
 
-    private var adapter = LatestNewsAdapter(arrayListOf())
+    private var adapter = NewsAdapter(arrayListOf())
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
 
-        binding = FragmentLatestNewsBinding.inflate(inflater, container, false)
+        binding = FragmentNewsBinding.inflate(inflater, container, false)
 
         setupUI()
         observeViewModel()
@@ -54,7 +55,38 @@ class LatestNewsFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        viewModel.getTopHeadlines(Constanta().API_KEY, "id")
+        viewModel.getNews(Constanta().API_KEY, "id", convertStringIDtoEN(category))
+    }
+
+    private fun convertStringIDtoEN(category: String): String {
+        var enCategory = ""
+
+        when(category){
+            getString(R.string.umum) -> {
+                enCategory = getString(R.string.general)
+            }
+            getString(R.string.bisnis) -> {
+                enCategory = getString(R.string.business)
+            }
+            getString(R.string.hiburan) -> {
+                enCategory = getString(R.string.entertainment)
+            }
+            getString(R.string.kesehatan) -> {
+                enCategory = getString(R.string.health)
+            }
+            getString(R.string.sains) -> {
+                enCategory = getString(R.string.science)
+            }
+            getString(R.string.olahraga) -> {
+                enCategory = getString(R.string.sports)
+            }
+            getString(R.string.teknologi) -> {
+                enCategory = getString(R.string.technology)
+            }
+
+        }
+
+        return enCategory
     }
 
     private fun observeViewModel(){
@@ -62,7 +94,7 @@ class LatestNewsFragment : Fragment() {
             viewModel.state.flowWithLifecycle(lifecycle).collect {
                 when(it.status){
                     Status.LOADING -> onLoading()
-                    Status.SUCCESS -> onSuccessLatestNews(it.data)
+                    Status.SUCCESS -> onSuccessNews(it.data)
                     Status.ERROR -> onError(it.message)
                     else -> {}
                 }
@@ -70,9 +102,9 @@ class LatestNewsFragment : Fragment() {
         }
     }
 
-    private fun onSuccessLatestNews(data: NewsModel?) {
+    private fun onSuccessNews(data: NewsModel?) {
         if (data != null) {
-            createLatestListNews(data.articles)
+            createListNews(data.articles)
         }
     }
 
@@ -85,10 +117,12 @@ class LatestNewsFragment : Fragment() {
         Log.d("Running-Error", "$message")
     }
 
-    private fun createLatestListNews(data: List<ArticlesItem?>?){
+    private fun createListNews(data: List<ArticlesItem?>?){
 
         binding.rvLatestNews.visibility = View.VISIBLE
         binding.imgLottie.visibility = View.GONE
+
+        Log.d("Running-Error", data.toString())
 
         renderList(data)
 

@@ -41,5 +41,18 @@ class NewsViewModel : ViewModel() {
         }
     }
 
+    fun getNews(key: String, country: String, category: String){
+        state.value = ApiState.loading()
+        viewModelScope.launch {
+            repository.getNews(key, country, category)
+                .catch {
+                    state.value = ApiState.error(it.localizedMessage)
+                }
+                .collect {
+                    state.value = ApiState.success(it.data)
+                }
+        }
+    }
+
 
 }

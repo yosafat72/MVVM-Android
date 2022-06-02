@@ -9,6 +9,7 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
+import com.example.mvvmflow.R
 import com.example.mvvmflow.adapter.DashboardMenuViewPagerAdapter
 import com.example.mvvmflow.databinding.ActivityMainBinding
 import com.example.mvvmflow.model.ArticlesItem
@@ -47,7 +48,15 @@ class MainActivity : AppCompatActivity() {
 
     private fun createViewPager(){
 
-        val titles = arrayOf("Terbaru", "Berita Utama", "Most Popular", "Most Commented")
+        val titles = arrayOf(
+            getString(R.string.umum),
+            getString(R.string.bisnis),
+            getString(R.string.hiburan),
+            getString(R.string.kesehatan),
+            getString(R.string.sains),
+            getString(R.string.olahraga),
+            getString(R.string.teknologi)
+        )
 
         binding.viewPager.adapter = DashboardMenuViewPagerAdapter(this, titles.size)
 

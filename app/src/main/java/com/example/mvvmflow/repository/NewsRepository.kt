@@ -17,4 +17,11 @@ class NewsRepository(private val apiService: ApiService) {
         }.flowOn(Dispatchers.IO)
     }
 
+    suspend fun getNews(key: String, country: String, category: String) : Flow<ApiState<NewsModel>> {
+        return flow {
+            val result = apiService.getNews(key, country, category)
+            emit(ApiState.success(result))
+        }.flowOn(Dispatchers.IO)
+    }
+
 }

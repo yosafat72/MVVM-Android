@@ -2,4 +2,20 @@
     <string name="app_name">MvvmFlow</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="umum">Umum</string>
+    <string name="bisnis">Bisnis</string>
+    <string name="hiburan">Hiburan</string>
+    <string name="kesehatan">Kesehatan</string>
+    <string name="sains">Sains</string>
+    <string name="olahraga">Olahraga</string>
+    <string name="teknologi">Teknologi</string>
+    
+    <string name="general">general</string>
+    <string name="business">business</string>
+    <string name="entertainment">entertainment</string>
+    <string name="health">health</string>
+    <string name="science">science</string>
+    <string name="sports">sports</string>
+    <string name="technology">technology</string>
 </resources>

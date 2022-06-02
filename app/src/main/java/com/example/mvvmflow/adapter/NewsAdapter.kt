@@ -8,8 +8,8 @@ import com.bumptech.glide.Glide
 import com.example.mvvmflow.databinding.NewsItemBinding
 import com.example.mvvmflow.model.ArticlesItem
 
-class LatestNewsAdapter(private val data: ArrayList<ArticlesItem>) :
-    RecyclerView.Adapter<LatestNewsAdapter.DataViewHolder>() {
+class NewsAdapter(private val data: ArrayList<ArticlesItem>) :
+    RecyclerView.Adapter<NewsAdapter.DataViewHolder>() {
 
     class DataViewHolder(view: View) : RecyclerView.ViewHolder(view){
         val binding = NewsItemBinding.bind(view)
