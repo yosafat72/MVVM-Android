@@ -5,12 +5,14 @@
       <map>
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.119" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.119" />
+        <entry key="app/src/main/res/layout/activity_detail_new.xml" value="0.23854166666666668" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1078125" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.24413757324218752" />
         <entry key="app/src/main/res/layout/appbar.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_headlines.xml" value="0.23854166666666668" />
         <entry key="app/src/main/res/layout/fragment_latest_news.xml" value="0.23854166666666668" />
         <entry key="app/src/main/res/layout/fragment_new_news.xml" value="0.23854166666666668" />
+        <entry key="app/src/main/res/layout/fragment_news.xml" value="0.23854166666666668" />
         <entry key="app/src/main/res/layout/news_item.xml" value="0.22447916666666667" />
         <entry key="app/src/main/res/layout/top_headlines.xml" value="0.22447916666666667" />
       </map>

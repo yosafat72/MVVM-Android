@@ -44,8 +44,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
-
     private fun createViewPager(){
 
         val titles = arrayOf(

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.DetailNewActivity"
+    android:orientation="vertical">
+
+    <include layout="@layout/appbar"/>
+
+    <WebView
+        android:id="@+id/webView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/imgNotFound"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/not_found_page"
+        app:lottie_autoPlay="true"
+        android:scaleType="fitCenter"
+        android:visibility="gone"/>
+
+
+</LinearLayout>

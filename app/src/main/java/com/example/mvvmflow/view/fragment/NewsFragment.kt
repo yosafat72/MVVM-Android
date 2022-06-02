@@ -1,5 +1,6 @@
 package com.example.mvvmflow.view.fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -115,6 +116,9 @@ class NewsFragment(private val category: String) : Fragment() {
 
     private fun onError(message: String?) {
         Log.d("Running-Error", "$message")
+        binding.rvLatestNews.visibility = View.GONE
+        binding.imgLottie.visibility = View.GONE
+        binding.imgNotFound.visibility = View.VISIBLE
     }
 
     private fun createListNews(data: List<ArticlesItem?>?){
@@ -122,12 +126,16 @@ class NewsFragment(private val category: String) : Fragment() {
         binding.rvLatestNews.visibility = View.VISIBLE
         binding.imgLottie.visibility = View.GONE
 
-        Log.d("Running-Error", data.toString())
-
-        renderList(data)
-
+        if (data?.size ?: 0 <= 0){
+            binding.rvLatestNews.visibility = View.GONE
+            binding.imgLottie.visibility = View.GONE
+            binding.imgNotFound.visibility = View.VISIBLE
+        }else{
+            renderList(data)
+        }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun renderList(data: List<ArticlesItem?>?) {
         data.let {
             listOfArticles -> listOfArticles.let { adapter.addData(it as List<ArticlesItem>) }
